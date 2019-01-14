@@ -120,8 +120,8 @@ function stopStream(stream) {
     */
      //FireFox用
      echoCancellation:false,
-     autoGainControl:false,
-     noiseSuppression:true,
+     //autoGainControl:false,
+     //noiseSuppression:true,
     }
     };
 
@@ -141,13 +141,7 @@ function stopStream(stream) {
         var panner1 = context1.createPanner();
         panner1.panningModel = 'HRTF';
         source1.connect(panner1);
-        /*
-        //StereoPannerの作成
-        var StereoPanner = context1.createStereoPanner();
-        panner1.connect(StereoPanner);
-        StereoPanner.pan.value = sound;
-        */
-  
+          
         //peer1の作成
         var peer1 = context1.createMediaStreamDestination();
         panner1.connect(peer1);
@@ -255,7 +249,7 @@ function setupCallEventHandlers(call){
     existingCall = call;
 
     
-    setupEndCallUI(call);
+    //setupEndCallUI(call);
 
     call.on('stream', function(stream){
         addVideo(call,stream);
@@ -287,6 +281,6 @@ function setupMakeCallUI(){
 function setupEndCallUI() {
     $('#make-call').hide();
     $('#end-call').show();
-    $('#their-id').text(call.remoteId);
+    //$('#their-id').text(call.remoteId);
 }
 //////////////////////////////////////
