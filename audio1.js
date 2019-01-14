@@ -10,7 +10,6 @@ let peer = null;
 let existingCall = null;
 var videoContainer = document.getElementById('container');
 var localVideo = document.getElementById('local_video');
-var sound = 0;
 
 function stopVideo() {
     localVideo.pause();
@@ -108,7 +107,7 @@ function stopStream(stream) {
   return id;
  }
 
- function startSelectedVideoAudio(sound) {
+ function startSelectedVideoAudio() {
   var audioId = getSelectedAudio();
   console.log('selected audio=' + audioId);
   var constraints = {
@@ -142,15 +141,17 @@ function stopStream(stream) {
         var panner1 = context1.createPanner();
         panner1.panningModel = 'HRTF';
         source1.connect(panner1);
+        /*
         //StereoPannerの作成
         var StereoPanner = context1.createStereoPanner();
         panner1.connect(StereoPanner);
         StereoPanner.pan.value = sound;
-      
+        */
+  
         //peer1の作成
         var peer1 = context1.createMediaStreamDestination();
-    
-        StereoPanner.connect(peer1); //ココの先頭変えるよ
+        panner1.connect(peer1);
+        //StereoPanner.connect(peer1); //ココの先頭変えるよ
         localStream1 = peer1.stream;
 
     logStream('selectedVideo', stream);
@@ -181,16 +182,8 @@ function getpeerid(id) {
 
 
 //オーディオシステムの選択
-$('#start_video_button_L').click(function () {
-    startSelectedVideoAudio(-1);
-});
-
-$('#start_video_button_R').click(function () {
-    startSelectedVideoAudio(1);
-});
-
 $('#start_video_button_W').click(function () {
-    startSelectedVideoAudio(0);
+    startSelectedVideoAudio();
 });
 
 
@@ -204,51 +197,6 @@ $('#AudioLR2').click(function () {
     getpeerid("ALR2");
     $('#callto-id').val("ln2");
 });
-
-$('#AudioL1').click(function () {
-    getpeerid("AL1");
-    $('#callto-id').val("AUL1");
-});
-
-$('#AudioL2').click(function () {
-    getpeerid("AL2");
-    $('#callto-id').val("AUL2");
-});
-
-$('#AudioR1').click(function () {
-    getpeerid("AR1");
-    $('#callto-id').val("AUR1");
-});
-
-$('#AudioR1').click(function () {
-    getpeerid("AR2");
-    $('#callto-id').val("AUR2");
-});
-
-$('#AudioUserL1').click(function () {
-    getpeerid("AUL1");
-    $('#callto-id').val("AL1");
-    isReceive = true;
-});
-
-$('#AudioUserL2').click(function () {
-    getpeerid("AUL2");
-    $('#callto-id').val("AL2");
-    isReceive = true;
-});
-
-$('#AudioUserR1').click(function () {
-    getpeerid("AUR1");
-    $('#callto-id').val("AR1");
-    isReceive = true;
-});
-
-$('#AudioUserR2').click(function () {
-    getpeerid("AUR2");
-    $('#callto-id').val("AR2");
-    isReceive = true;
-});
-
 
 $('#random').click(function () {
     getpeerid(null);
@@ -287,25 +235,6 @@ function start() {
     });
 }
 
-
-/*
-///////////////open,error,close,disconnectedイベント
-peer.on('open', function(){         //発火する
-    $('#my-id').text(peer.id);      //Peer IDの自動作成タイム
-});
-
-peer.on('error', function(err){
-    alert(err.message);
-});
-
-peer.on('close', function(){
-});
-
-peer.on('disconnected', function(){
-});
-//////////////////////////
-*/
-
 ///////////////発信処理・切断処理・着信処理
 $('#make-call').submit(function(e){
     e.preventDefault();
@@ -316,10 +245,6 @@ $('#make-call').submit(function(e){
 $('#end-call').click(function(){
     existingCall.close();
 });
-
-
-/////////////////////
-
 
 //////////Callオブジェクトに必要なイベント
 function setupCallEventHandlers(call){

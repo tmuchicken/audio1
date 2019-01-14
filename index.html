@@ -2,7 +2,7 @@
 <html>
 <head>
  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
- <title>media devices</title>
+ <title>audioステレオのみ</title>
 </head>
 <body>
 
@@ -13,9 +13,7 @@
  </select>
  
  <br>
- <button id="start_video_button_L" onclick="startSelectedVideoAudio()">START[左から再生]</button>
- <button id="start_video_button_R" onclick="startSelectedVideoAudio()">START[右から再生]</button>
- <button id="start_video_button_W" onclick="startSelectedVideoAudio()">START[ステレオ再生]</button>
+ <button id="start_video_button_W" onclick="startSelectedVideoAudio()">START</button>
  <button id="stop_button" onclick="stopVideo()">StopVideo</button>  <!-- 1010用 -->
  <div id="container"></div>
 
@@ -26,17 +24,6 @@
     <p>select your id</p>
     <button href="#" class="pure-button pure-button-secondary" type="button" id="AudioLR1">AudioLR1</button>
     <button href="#" class="pure-button pure-button-secondary" type="button" id="AudioLR2">AudioLR2</button>
-    <br>
-    <button href="#" class="pure-button pure-button-secondary" type="button" id="AudioL1">AudioL1</button>
-    <button href="#" class="pure-button pure-button-secondary" type="button" id="AudioL2">AudioL2</button>
-    <button href="#" class="pure-button pure-button-secondary" type="button" id="AudioR1">AudioR1</button>
-    <button href="#" class="pure-button pure-button-secondary" type="button" id="AudioR2">AudioR2</button>
-    <br>
-    <button href="#" class="pure-button pure-button-secondary" type="button" id="AudioUserL1">AudioUserL1</button>
-    <button href="#" class="pure-button pure-button-secondary" type="button" id="AudioUserL2">AudioUserL2</button>
-    <button href="#" class="pure-button pure-button-secondary" type="button" id="AudioUserR1">AudioUserR1</button>
-    <button href="#" class="pure-button pure-button-secondary" type="button" id="AudioUserR2">AudioUserR2</button>
-    <br>
     <button href="#" class="pure-button pure-button-secondary" type="button" id="random">Random</button>
 </div>
  <!--<font color="blue"><p>make call　先をtc4 とかに設定して"call" 連打してください</p></font>-->
@@ -61,5 +48,5 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="https://cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script>
-<script type="text/javascript" src="audioS.js"></script>
+<script type="text/javascript" src="audio1.js"></script>
 </html>
